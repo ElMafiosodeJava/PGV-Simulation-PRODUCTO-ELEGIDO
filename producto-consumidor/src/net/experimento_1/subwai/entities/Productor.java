@@ -2,32 +2,31 @@ package net.experimento_1.subwai.entities;
 
 import java.util.Random;
 
-public class Producer extends Thread{
-    private final SharedBuffer almacen;
+public class Productor extends Thread{
+    private final Almacen almacen;
     private final int cantidadAProducir;
     private final String[] tiposProducto;
-    private final int maxTiempoProduccionMs;
+    private final int tiempoProduccionMax;
     private final Random random = new Random();
 
-    public Producer(String nombre, SharedBuffer almacen, int cantidadAProducir,
+    public Productor(String nombre, Almacen almacen, int cantidadAProducir,
                     String[] tiposProducto, int maxTiempoProduccionMs) {
         super(nombre);
         this.almacen = almacen;
         this.cantidadAProducir = cantidadAProducir;
         this.tiposProducto = tiposProducto;
-        this.maxTiempoProduccionMs = maxTiempoProduccionMs;
+        this.tiempoProduccionMax = maxTiempoProduccionMs;
     }
 
     @Override
     public void run() {
         for (int i = 1; i <= cantidadAProducir; i++) {
             try {
-                // Simular tiempo de producción aleatorio
-                int tiempo = random.nextInt(maxTiempoProduccionMs) + 1;
+                int tiempo = random.nextInt(tiempoProduccionMax) + 1;
                 Thread.sleep(tiempo);
 
                 String tipo = tiposProducto[random.nextInt(tiposProducto.length)];
-                Product product = new Product(i, tipo, getName());
+                Producto product = new Producto(i, tipo, getName());
 
                 almacen.put(product);
 

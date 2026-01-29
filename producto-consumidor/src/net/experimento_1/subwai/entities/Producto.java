@@ -1,11 +1,11 @@
-package net.experimento_3.subwai.entities;
+package net.experimento_1.subwai.entities;
 
-class Product {
+class Producto {
     private final int id;
     private final String tipo;
     private final String productor;
 
-    public Product(int id, String tipo, String productor) {
+    public Producto(int id, String tipo, String productor) {
         this.id = id;
         this.tipo = tipo;
         this.productor = productor;

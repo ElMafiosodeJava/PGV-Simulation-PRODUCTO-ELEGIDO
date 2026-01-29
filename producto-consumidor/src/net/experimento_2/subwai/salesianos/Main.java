@@ -1,14 +1,14 @@
 package net.experimento_2.subwai.salesianos;
 
-import net.experimento_2.subwai.entities.Consumer;
-import net.experimento_2.subwai.entities.Producer;
-import net.experimento_2.subwai.entities.SharedBuffer;
+import net.experimento_2.subwai.entities.Consumidor;
+import net.experimento_2.subwai.entities.Productor;
+import net.experimento_2.subwai.entities.Almacen;
 
-public class SimulationMain {
+public class Main {
 
     public static void main(String[] args) {
         int capacidadAlmacen = 5;
-        SharedBuffer almacen = new SharedBuffer(capacidadAlmacen);
+        Almacen almacen = new Almacen(capacidadAlmacen);
 
         String[] tipos = {
                 "Tomate", "Lechuga", "Zanahoria", "Pepino", "Pimiento",
@@ -18,14 +18,13 @@ public class SimulationMain {
         int productosAProducir = 10;
         int productosAConsumir = 10;
 
-        // PRODUCCIÓN MUCHO MÁS RÁPIDA
-        int maxProduccion = 200;   // muy corto
-        int maxConsumo = 1000;     // más lento
+        int maxProduccion = 200;   
+        int maxConsumo = 1000;    
 
-        Producer productor = new Producer("Juan", almacen,
+        Productor productor = new Productor("Juan", almacen,
                 productosAProducir, tipos, maxProduccion);
 
-        Consumer consumidor = new Consumer("Paco", almacen,
+        Consumidor consumidor = new Consumidor("Paco", almacen,
                 productosAConsumir, maxConsumo);
 
         productor.start();
