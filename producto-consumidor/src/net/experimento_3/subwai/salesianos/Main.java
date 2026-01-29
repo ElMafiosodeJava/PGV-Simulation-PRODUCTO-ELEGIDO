@@ -1,14 +1,14 @@
 package net.experimento_3.subwai.salesianos;
 
-import net.experimento_3.subwai.entities.Consumer;
-import net.experimento_3.subwai.entities.Producer;
-import net.experimento_3.subwai.entities.SharedBuffer;
+import net.experimento_3.subwai.entities.Consumidor;
+import net.experimento_3.subwai.entities.Productor;
+import net.experimento_3.subwai.entities.Almacen;
 
-public class SimulationMain {
+public class Main {
 
     public static void main(String[] args) {
         int capacidadAlmacen = 5;
-        SharedBuffer almacen = new SharedBuffer(capacidadAlmacen);
+        Almacen almacen = new Almacen(capacidadAlmacen);
 
         String[] tipos = {
                 "Tomate", "Lechuga", "Zanahoria", "Pepino", "Pimiento",
@@ -18,18 +18,18 @@ public class SimulationMain {
         int productosAProducir = 10;
         int productosAConsumir = 10;
 
-        int maxProduccion = 800; // tiempos "normales"
-        int maxConsumo = 800;    // también
+        int maxProduccion = 800; 
+        int maxConsumo = 800;    
 
-        Producer productor = new Producer("Productor-PRIORITARIO", almacen,
+        Productor productor = new Productor("Productor-PRIORITARIO", almacen,
                 productosAProducir, tipos, maxProduccion);
 
-        Consumer consumidor = new Consumer("Consumidor-NORMAL", almacen,
+        Consumidor consumidor = new Consumidor("Consumidor-NORMAL", almacen,
                 productosAConsumir, maxConsumo);
 
-        // Establecer prioridades
+        
         productor.setPriority(Thread.MAX_PRIORITY);
-        consumidor.setPriority(Thread.NORM_PRIORITY); // o MIN_PRIORITY para exagerar
+        consumidor.setPriority(Thread.NORM_PRIORITY); 
 
         productor.start();
         consumidor.start();

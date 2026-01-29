@@ -1,16 +1,14 @@
-import net.subwai.entities.Consumer;
-import net.subwai.entities.Producer;
-import net.subwai.entities.SharedBuffer;
+import net.subwai.entities.Consumidor;
+import net.subwai.entities.Productor;
+import net.subwai.entities.Almacen;
 
-public class SimulationMain {
+public class Main {
 
     public static void main(String[] args) {
 
-        // Capacidad del recurso compartido (puestito / almacén)
         int capacidadAlmacen = 5;
-        SharedBuffer almacen = new SharedBuffer(capacidadAlmacen);
+        Almacen almacen = new Almacen(capacidadAlmacen);
 
-        // Tipos de productos (al menos 10)
         String[] tiposVerdura = {
                 "Tomate", "Lechuga", "Zanahoria", "Pepino", "Pimiento",
                 "Calabacín", "Berenjena", "Cebolla", "Ajo", "Coliflor"
@@ -19,22 +17,18 @@ public class SimulationMain {
         int productosPaco = 10;
         int productosRamon = 10;
 
-        // Tiempo máximo de producción (mismo para todos los productores)
         int maxTiempoProduccionMs = 1000;
 
-        // Productores
-        Producer paco = new Producer("Paco", almacen, productosPaco,
+        Productor paco = new Productor("Paco", almacen, productosPaco,
                 tiposVerdura, maxTiempoProduccionMs);
 
-        Producer ramon = new Producer("Ramón", almacen, productosRamon,
+        Productor ramon = new Productor("Ramón", almacen, productosRamon,
                 tiposVerdura, maxTiempoProduccionMs);
 
-        // Tiempo máximo de consumo por cliente (propio de cada uno)
-        Consumer faustino = new Consumer("Faustino", almacen, 5, 800);
-        Consumer mrGentleman = new Consumer("Mr. Gentleman", almacen, 10, 900);
-        Consumer loquendo = new Consumer("Loquendo", almacen, 5, 700);
+        Consumidor faustino = new Consumidor("Faustino", almacen, 5, 800);
+        Consumidor mrGentleman = new Consumidor("Mr. Gentleman", almacen, 10, 900);
+        Consumidor loquendo = new Consumidor("Loquendo", almacen, 5, 700);
 
-        // Iniciar hilos
         paco.start();
         ramon.start();
 
@@ -42,7 +36,6 @@ public class SimulationMain {
         mrGentleman.start();
         loquendo.start();
 
-        // Esperar a que todos terminen
         try {
             paco.join();
             ramon.join();
